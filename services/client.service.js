@@ -1,11 +1,11 @@
-const clientDto  = require('../dto/client.dto');
+const {clientDto,clientDetailDto}  = require('../DTO/client.dto');
 const db = require('../models');
 
 const clientService = {
 
     fetchAll: async () => {
         const client = await db.client.findAll();
-        return client.map(char => new clientDTO(client));
+        return client.map(char => new clientDto(client));
     },
 
     fetchOne: async (id) => {
@@ -52,7 +52,7 @@ const clientService = {
     update: async (id,newData) =>{
         const updatedClient = await db.client.update({updatedClient:newData},{where: {id}});
 
-        return ClientDetailDto(updatedClient)
+        return clientDetailDto(updatedClient)
     },
     
 }

@@ -1,4 +1,4 @@
-const authDTO  = require('../dto/auth.dto');
+const authDto  = require('../DTO/auth.dto');
 const db = require('../models');
 const jwt = require('jsonwebtoken');
 
@@ -7,7 +7,7 @@ const authService = {
 
     insert: async (data) => {
         const auth = await db.Auth.create(data)
-        return new authDTO(auth)
+        return new authDto(auth)
     },
 
     exist: async (login) => {
@@ -15,7 +15,7 @@ const authService = {
             where: { login }
         });
 
-        return new authDTO(auth);
+        return new authDto(auth);
     },
     addJwt: async (jwt, id) => {
         // Vérification de l'existence de l'utilisateur

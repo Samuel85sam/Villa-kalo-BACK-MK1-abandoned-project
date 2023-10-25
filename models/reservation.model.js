@@ -1,5 +1,5 @@
 const {Sequelize, DataTypes, ModelStatic } = require('sequelize');
-const { reservation } = require('.');
+
 
 /**
  * Fonction pour créer un model Character (donc table de db)
@@ -25,7 +25,7 @@ module.exports = (sequelize) => {
             allowNull: false,
         },
         occupantQty: {
-            type: DataTypes.INTEGER(2),
+            type: DataTypes.INTEGER,
             allowNull: false,
         },
         avis: {

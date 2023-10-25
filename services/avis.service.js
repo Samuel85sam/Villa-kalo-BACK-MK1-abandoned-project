@@ -1,11 +1,11 @@
-const avisDto  = require('../dto/avis.dto');
+const {avisDto,avisDetailDto}  = require('../DTO/avis.dto');
 const db = require('../models');
 
 const avisService = {
 
     fetchAll: async () => {
         const avis = await db.avis.findAll();
-        return avis.map(char => new avisDTO(avis));
+        return avis.map(char => new avisDto(avis));
     },
 
     fetchOne: async (id) => {

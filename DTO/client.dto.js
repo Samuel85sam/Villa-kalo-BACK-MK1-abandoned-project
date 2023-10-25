@@ -1,4 +1,4 @@
-class clientDTO {
+class clientDto {
 
     id;
     nom;
@@ -15,7 +15,7 @@ class clientDTO {
     }
 }
 
-class clientDetailDTO {
+class clientDetailDto {
 
     id;
     nom;
@@ -36,4 +36,4 @@ class clientDetailDTO {
     }
 }
 
-module.exports = {clientDTO,clientDetailDTO};
+module.exports = {clientDto,clientDetailDto};

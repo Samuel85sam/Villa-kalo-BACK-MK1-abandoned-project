@@ -8,16 +8,20 @@ const authController = {
     register: async (req, res) => {
         // Récupération des données utilsateur
         const authData = req.body;
+        console.log(`authData ==>  ${authData}` );
 
         // Validation les informations récupérées depuis les données utilisateur
         const validatedData = await authValidator.validate(authData);
+        console.log(`validatedData ==>  ${validatedData}` );
 
         // Destructuring des données vérifées
         const { login, password } = validatedData;
         const hashedPassword = bcrypt.hashSync(password, 10);//level 10 de sécu est suffisant
+        console.log(`hashedPassword ==>  ${hashedPassword}` );
 
         // Envoi des données validées et hashées à la DB
         const authInserted = await authService.insert({ login, hashedPassword });
+        console.log(`authInsreted ==>  ${authInserted}` );
 
         if (authInserted) {
             res
@@ -26,6 +30,7 @@ const authController = {
                 // On redirige les informations utilisateur sur la route login (ne pas oublier de gérer la redirection dans le front)
                 .location(`api/auth/login`)
                 .json(authInserted)
+                console.log(`==> insertion ok, compte crée` );
         }
     },
 

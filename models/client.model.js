@@ -20,7 +20,7 @@ module.exports = (sequelize) => {
             allowNull: false,
         },
         tel: {
-            type: DataTypes.INTEGER(16),
+            type: DataTypes.INTEGER,
             allowNull: false,
         },
         mail: {
@@ -28,7 +28,7 @@ module.exports = (sequelize) => {
             allowNull: false,
         },
         reservations: {
-            type: DataTypes.INTEGER(50),
+            type: DataTypes.INTEGER,
             allowNull: false,
         },
         bankAcount: {

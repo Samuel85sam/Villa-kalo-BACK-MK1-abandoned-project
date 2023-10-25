@@ -1,11 +1,11 @@
-const reservationDto  = require('../dto/reservation.dto');
+const {reservationDto,reservationDetailDto}  = require('../DTO/reservation.dto');
 const db = require('../models');
 
 const reservationService = {
 
     fetchAll: async () => {
         const reservation = await db.reservation.findAll();
-        return reservation.map(char => new reservationDTO(reservation));
+        return reservation.map(char => new reservationDto(reservation));
     },
 
     fetchOne: async (id) => {
@@ -52,7 +52,7 @@ const reservationService = {
     update: async (id,newData) =>{
         const updatedReservation = await db.reservation.update({updatedReservation:newData},{where: {id}});
 
-        return ReservationDetailDto(updatedReservation)
+        return reservationDetailDto(updatedReservation)
     },
     
 }

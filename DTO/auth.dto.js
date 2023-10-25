@@ -1,4 +1,4 @@
-class authDTO {
+class authDto {
 
     id;
     login;
@@ -11,4 +11,4 @@ class authDTO {
     }
 }
 
-module.exports = authDTO;
+module.exports = authDto;
