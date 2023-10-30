@@ -6,11 +6,12 @@ const jwt = require('jsonwebtoken');
 const authService = {
 
     insert: async (data) => {
-        const auth = await db.Auth.create(data)
+        console.log(`db ==> `,db);
+        const auth = await db.auth.create(data)
         return new authDto(auth)
     },
 
-    exist: async (login) => {
+    exist: async (login) => {RTCRtpSender
         const auth = await db.Auth.findOne({
             where: { login }
         });
