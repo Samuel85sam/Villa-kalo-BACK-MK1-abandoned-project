@@ -9,7 +9,8 @@ const authController = {
         // Récupération des données utilsateur
         const authData = req.body;
         console.log(`authData ==>  ${authData}` );
-
+        console.log('req.body = ↓↓↓');
+        console.log(req.body);
         // Validation les informations récupérées depuis les données utilisateur
         const validatedData = await authValidator.validate(authData);
         console.log(`validatedData ==>  ${validatedData}` );
