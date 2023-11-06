@@ -28,7 +28,7 @@ app.use(express.json());
 // Ajout du routing --> respect du RESTfull on ajoute '/api' comme route de base
 app.use('/api', router)
 
-app.listen(PORT, () => {
-    console.log(`==> Web server running on port ${PORT}`);
+app.listen(3002, () => {
+    console.log(`==> Web server running on port 3000`);
 });
 
