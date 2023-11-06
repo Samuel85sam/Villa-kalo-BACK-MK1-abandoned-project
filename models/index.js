@@ -5,7 +5,7 @@ const { Sequelize } = require('sequelize');
 const sequelize = new Sequelize({
     dialect: 'mssql',
     database: 'Villa',
-    username: 'sa',
+    username: 'kolloAdmin',
     password: process.env.DB_PASSWORD,
     host: 'localhost',
     port: 1433 // Le port de base de SQL Server
