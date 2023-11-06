@@ -9,7 +9,8 @@ const authController = {
         // Récupération des données utilsateur
         const authData = req.body;
         console.log(`authData ==>  ${authData}` );
-
+        console.log('req.body = ↓↓↓');
+        console.log(req.body);
         // Validation les informations récupérées depuis les données utilisateur
         const validatedData = await authValidator.validate(authData);
         console.log(`validatedData ==>  ${validatedData}` );
@@ -51,12 +52,15 @@ const authController = {
             if (existingToken.jwt) {
                 // Vérification de la validité du token (jwt)
                 const tokenValid = await authService.verifyJwt(existingToken.jwt);
+                console.log('existingToken');
+                console.log(existingToken.jwt);
 
 
                 if (tokenValid) {
                     // Le token (jwt) est valide, envoi de l'information dans le header de la requête
                     res.setHeader('Authorization', `Bearer ${existingToken.jwt}`);
-                    return res.status(200).json({ token: existingToken.jwt });
+                    return (
+                             res.status(200).json({ token: existingToken.jwt }))
                 }
             };
 
@@ -79,13 +83,14 @@ const authController = {
             // Signer le token (jwt) avec le SECRET
             const secret = process.env.JWT_SECRET;
             const token = jwt.sign(payload, secret, options);
-
+            
             // Stocker le token (jwt) dans la DB
             const clientJwt = await authService.addJwt(token, user.id);
 
             if (clientJwt) {
                 // Si l'insertion s'est correctement déroulée, on envoi les informations dans le header et au front en json
                 res.setHeader("Authorization", `Bearer ${token}`);
+                console.log('user identifié ===> pasword ok');
                 return res.status(200).json({ token });
             }
         } catch (err) {

@@ -6,13 +6,14 @@ const jwt = require('jsonwebtoken');
 const authService = {
 
     insert: async (data) => {
-        console.log(`db ==> `,db);
+        console.log(`db ===========================================================> `,db);
         const auth = await db.auth.create(data)
         return new authDto(auth)
     },
 
-    exist: async (login) => {RTCRtpSender
-        const auth = await db.Auth.findOne({
+    exist: async (login) => {
+        console.log(`login sended ===>${login}`);
+        const auth = await db.auth.findOne({
             where: { login }
         });
 
@@ -20,7 +21,7 @@ const authService = {
     },
     addJwt: async (jwt, id) => {
         // Vérification de l'existence de l'utilisateur
-        const userFound = await db.Auth.findOne({
+        const userFound = await db.auth.findOne({
             where: { id }
         });
         // S'il existe, on lui donne un jwt (s'il n'en a pas encore)
@@ -30,7 +31,7 @@ const authService = {
     },
 
     getJwt: async (id) => {
-        const jwtExist = await db.Auth.findOne({
+        const jwtExist = await db.auth.findOne({
             where: { id }
         });
 
