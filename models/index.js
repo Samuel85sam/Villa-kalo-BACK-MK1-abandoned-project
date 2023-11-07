@@ -14,10 +14,10 @@ const sequelize = new Sequelize({
     // Création de l'object db
 const db = {};
 module.exports = db;
-
+//!↓↓↓ pas sûr de comprendre
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
-
+//! ↑↑↑ pas sûr de comprendre???
 // Ajout des models
 db.auth = require('./auth.model')(sequelize);
 db.client = require('./client.model')(sequelize);

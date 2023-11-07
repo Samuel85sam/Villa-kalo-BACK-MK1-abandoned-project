@@ -26,7 +26,7 @@ app.use(express.json());
 
 // Ajout du routing --> respect du RESTfull on ajoute '/api' comme route de base
 app.use('/api', router)
-
+//!↑↑↑ cnf==> auth controller ligne 26
 app.listen(PORT, () => {
     console.log(`==> Web server running on port ${PORT}`);
 });
