@@ -4,6 +4,8 @@ const jwt = require("jsonwebtoken");
 const authService = require("../services/auth.service");
 
 const authController = {
+
+
   register: async (req, res) => {
     // Récupération des données utilsateur
     const authData = req.body;
@@ -28,19 +30,20 @@ const authController = {
     }
   },
 
+
+
+
+
   login: async (req, res) => {
     try {
       const { login, password } = req.body;
-
       // Vérification de l'existence de l'utilisateur via son login
       const user = await authService.exist(login);
-
       if (!user) {
         // Si l'utilisateur n'existe pas, renvoi une réponse 401 (Unauthorized)
         console.log("userLoginFail===>not existing!!!");
         return res.status(401).json({ message: "Utilisateur non trouvé" });
       }
-
       // Vérification de l'existence d'un token (jwt) pour cet utilisateur
       const existingToken = await authService.getJwt(user.id);
       if (existingToken.jwt) {
@@ -48,21 +51,18 @@ const authController = {
         const tokenValid = await authService.verifyJwt(existingToken.jwt);
         console.log("existingToken ↓↓↓");
         console.log(existingToken.jwt);
-
         if (tokenValid) {
           // Le token (jwt) est valide, envoi de l'information dans le header de la requête
-          res.setHeader("Authorization", `Bearer ${existingToken.jwt}`);
+          res.setHeader("Authorization", `Bearer ${existingToken.jwt}`);//==> type d'identification (lr systeme "bearer utilise un token typez jwt")
           return res.status(200).json({ token: existingToken.jwt });
         }
       }
-      //! BEARER ??? ↑↑↑
       // Vérification du password fourni par l'utilisateur avec le password hashé dans la DB
       const passwordMatch = await bcrypt.compare(password, user.hashedPassword);
       if (!passwordMatch) {
         // Si les mots de passe ne correspondent pas, renvoi une réponse 401 (Unauthorized)
         return res.status(401).json({ message: "Mot de passe incorrect" });
       }
-
       // Si les password correspondent, on va créer un token (jwt) pour l'utilisateur
       const payload = {
         userId: user.id,
@@ -71,14 +71,12 @@ const authController = {
       const options = {
         expiresIn: "2d",
       };
-
       // Signer le token (jwt) avec le SECRET
       const secret = process.env.JWT_SECRET;
       const token = jwt.sign(payload, secret, options);
 
       // Stocker le token (jwt) dans la DB
       const clientJwt = await authService.addJwt(token, user.id);
-
       if (clientJwt) {
         // Si l'insertion s'est correctement déroulée, on envoi les informations dans le header et au front en json
         res.setHeader("Authorization", `Bearer ${token}`);
