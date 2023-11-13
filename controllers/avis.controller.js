@@ -19,7 +19,7 @@ const avisController = {
                 // On informe que l'insertion des données s'est correctement déroulée, et que l'avis est crée
                 .status(201)
                 // On redirige les informations utilisateur sur la route homepage (ne pas oublier de gérer la redirection dans le front)
-                .location(`api/auth/login`)//! ← ??
+                .location(`api/avis/add`)
                 .json(avisInserted);
             console.log(`client ==>  ${client}`);
             console.log(`prenom ==>  ${prenom}`);
@@ -35,10 +35,17 @@ const avisController = {
     },
 
     getOne: async (req, res) => {
-        let avisId = req.body
+        let Id = req.body
         //! comment recupèrer l'id au passage de la souris??
-        let OneAvis = await avisService.fetchOne()   
+        let OneAvis = await avisService.fetchOne(Id)   
     },
+
+    deleteOne: async (req, res) =>{
+        let Id = req.body
+        //! comment recupèrer l'id au passage de la souris??
+        let deleteOne = await avisService.delete(Id)   
+    },
+    
 
 
 
